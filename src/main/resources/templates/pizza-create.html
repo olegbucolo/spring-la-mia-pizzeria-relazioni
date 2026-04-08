@@ -13,17 +13,17 @@
 
             <div>
                 <label for="name">Nome pizza</label>
-                <input th:field="*{name}" id="name" name="name" type="text" required>
+                <input th:field="*{name}" id="name" type="text" required>
             </div>
 
             <div>
                 <label for="description">Descrizione</label>
-                <input th:field="*{description}" id="description" name="description" type="text">
+                <input th:field="*{description}" id="description"  type="text">
             </div>
 
             <div>
                 <label for="price">Prezzo</label>
-                <input th:field="*{price}" id="price" name="price" type="number" step="0.01" required>
+                <input th:field="*{price}" id="price" type="number" step="0.01" required>
             </div>
 
             <button type="submit">Crea Nuova Pizza</button>

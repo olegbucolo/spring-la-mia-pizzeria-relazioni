@@ -11,9 +11,9 @@
     <div class="d-flex justify-content-between p-2 border" th:each="pizza : ${pizzas}">
         <a class="" th:href="@{'/pizzas/' + ${pizza.id}}" th:text="${pizza.name}"></a>
         <div class="text-end d-flex ">
-            <a href="#" class="me-2"><button>Modifica</button></a>
+            <a th:href="@{'/pizzas/edit/' + ${pizza.id}}" class="me-2">Modifica</a>
             <form th:action="@{'/pizzas/' + ${pizza.id}}" method="post">
-                <input name="_method" type="hidden" value="delete">
+                <input type="hidden" name="_method" value="delete">
                 <button class="bg-danger" type="submit">Cancella</button>
             </form>
         </div>

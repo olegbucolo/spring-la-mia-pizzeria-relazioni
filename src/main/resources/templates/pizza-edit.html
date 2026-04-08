@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:replace="fragments/styles :: styles"></th:block>
+    <title>Document</title>
+</head>
+
+<body>
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <main>
+        <form th:action="@{'/edit/' + ${pizza.id}}" th:object="${pizza}" method="post">
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" th:field="*{name}">
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <input id="description" type="text" th:field="*{description}">
+            </div>
+            <div>
+                <label for="price">Price</label>
+                <input id="price" type="number" th:field="*{price}">
+            </div>
+            <input type="hidden" name="_method" value="put">
+            <button type="submit">Modifica pizza</button>
+        </form>
+    </main>
+</body>
+
+</html>

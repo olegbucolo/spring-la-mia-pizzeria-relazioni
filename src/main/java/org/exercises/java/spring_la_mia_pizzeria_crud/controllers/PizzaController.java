@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -62,9 +63,10 @@ public class PizzaController {
         return "pizza-edit";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editAtId(@ModelAttribute Pizza pizza){
-        
+    @PutMapping("/{id}")
+    public String editAtId(@PathVariable int id, @ModelAttribute Pizza pizza){
+        pizza.setId(id);
+        pr.save(pizza);
         return "redirect:/pizzas";
     }
     

@@ -1,6 +1,9 @@
-package org.exercises.java.spring_la_mia_pizzeria_crud.models;
+package org.exercises.java.spring_la_mia_pizzeria_relazioni.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -29,6 +32,9 @@ public class Pizza {
     @Column(nullable = false, precision = 10, scale = 2)
     @Digits(integer = 8, fraction = 2)
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SpecialOffer> specialOffers = new ArrayList<>();
 
     public Pizza() {
     }
@@ -71,5 +77,17 @@ public class Pizza {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public void addSpecialOffer(SpecialOffer offer){
+        if(offer == null) return;
+        specialOffers.add(offer);
+        offer.setPizza(this);
+    }
+
+    public void removeSpecialOffer(SpecialOffer offer){
+        if (offer == null || specialOffers.contains(offer)) return;
+        specialOffers.remove(offer);
+        offer.setPizza(null);
     }
 }

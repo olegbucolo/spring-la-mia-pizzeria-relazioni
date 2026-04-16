@@ -12,6 +12,8 @@
     <div th:text="${pizza.name}"></div>
     <div th:text="${pizza.description}"></div>
     <div th:text="${pizza.price} + ' €'"></div>
+
+    <a th:href="@{/offers/create(pizzaId=${pizza.id})}">Modify this pizza</a>
 </body>
 
 </html>

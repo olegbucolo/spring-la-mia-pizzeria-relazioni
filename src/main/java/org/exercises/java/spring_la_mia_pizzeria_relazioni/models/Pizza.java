@@ -90,4 +90,8 @@ public class Pizza {
         specialOffers.remove(offer);
         offer.setPizza(null);
     }
+
+    public List<SpecialOffer> getSpecialOffers(){
+        return specialOffers;
+    }
 }

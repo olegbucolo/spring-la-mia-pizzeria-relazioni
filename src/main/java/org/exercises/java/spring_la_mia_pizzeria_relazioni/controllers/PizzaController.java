@@ -62,7 +62,7 @@ public class PizzaController {
         return "redirect:/pizzas";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editAtId(@PathVariable int id, Model model) {
         Pizza pizza = pr.findById(id).orElseThrow();
         model.addAttribute("pizza", pizza);

@@ -2,7 +2,9 @@ package org.exercises.java.spring_la_mia_pizzeria_relazioni.models;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -35,6 +37,10 @@ public class Pizza {
 
     @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SpecialOffer> specialOffers = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     public Pizza() {
     }
@@ -79,19 +85,68 @@ public class Pizza {
         this.price = price;
     }
 
-    public void addSpecialOffer(SpecialOffer offer){
-        if(offer == null) return;
+    public List<SpecialOffer> getSpecialOffers() {
+        return specialOffers;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    // HELPER METHODS
+
+    // add/remove special offers helper
+    public void addSpecialOffer(SpecialOffer offer) {
+        if (offer == null)
+            return;
         specialOffers.add(offer);
         offer.setPizza(this);
     }
 
-    public void removeSpecialOffer(SpecialOffer offer){
-        if (offer == null || specialOffers.contains(offer)) return;
+    public void removeSpecialOffer(SpecialOffer offer) {
+        if (offer == null || !specialOffers.contains(offer))
+            return;
         specialOffers.remove(offer);
         offer.setPizza(null);
     }
 
-    public List<SpecialOffer> getSpecialOffers(){
-        return specialOffers;
+    // add/remove ingredients helper
+
+    public void addIngredient(Ingredient ingredient) {
+        if (ingredient == null)
+            return;
+
+        ingredients.add(ingredient);
+        ingredient.getPizzas().add(this);
     }
+
+    public void removeIngredient(Ingredient ingredient) {
+        if (ingredient == null || !ingredients.contains(ingredient))
+            return;
+
+        ingredients.remove(ingredient);
+        ingredient.getPizzas().remove(this);
+    }
+
+    // Override for comparing using id instead of memory addresses
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Pizza))
+            return false;
+        Pizza pizza = (Pizza) o;
+        return id != null && id.equals(pizza.getId());
+    }
+
+    // Override for saving
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
 }

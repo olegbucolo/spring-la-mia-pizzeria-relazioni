@@ -24,12 +24,19 @@ public class Ingredient {
 
     @NotBlank
     @Column(length = 50)
-    @Size(max = 50)
+    @Size(max = 50, message = "Il nome deve contenere al massimo 50 lettere")
     private String name;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "ingredients")
     private Set<Pizza> pizzas = new HashSet<>();
+
+    public Ingredient() {
+    };
+
+    public Ingredient(String name) {
+        this.name = name;
+    };
 
     public Integer getId() {
         return id;
@@ -56,15 +63,22 @@ public class Ingredient {
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(!(o instanceof Ingredient)) return false;
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Ingredient))
+            return false;
         Ingredient ingredient = (Ingredient) o;
         return id != null && id.equals(ingredient.getId());
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "\n" + " Ingredient{" + "id=" + id + ", name='" + name + "'}";
     }
 }

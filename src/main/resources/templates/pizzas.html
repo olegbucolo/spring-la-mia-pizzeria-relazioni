@@ -8,16 +8,18 @@
 
 <body>
     <th:block th:replace="~{fragments/header :: header}"></th:block>
-    <div class="d-flex justify-content-between p-2 border" th:each="pizza : ${pizzas}">
-        <a class="" th:href="@{'/pizzas/' + ${pizza.id}}" th:text="${pizza.name}"></a>
-        <div class="text-end d-flex ">
-            <a th:href="@{'/pizzas/' + ${pizza.id} + '/edit'}" class="me-2">Modifica</a>
-            <form th:action="@{'/pizzas/' + ${pizza.id}}" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <button class="bg-danger" type="submit">Cancella</button>
-            </form>
+    <main>
+        <div class="d-flex justify-content-between p-2 border" th:each="pizza : ${pizzas}">
+            <a class="" th:href="@{'/pizzas/' + ${pizza.id}}" th:text="${pizza.name}"></a>
+            <div class="text-end d-flex ">
+                <a th:href="@{'/pizzas/' + ${pizza.id} + '/edit'}" class="me-2">Modifica</a>
+                <form th:action="@{'/pizzas/' + ${pizza.id}}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="bg-danger" type="submit">Cancella</button>
+                </form>
+            </div>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>

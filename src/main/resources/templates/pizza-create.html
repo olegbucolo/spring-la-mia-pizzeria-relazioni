@@ -20,7 +20,7 @@
 
             <div>
                 <label for="description">Descrizione</label>
-                <input th:field="*{description}" id="description"  type="text">
+                <input th:field="*{description}" id="description" type="text">
                 <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             </div>
 
@@ -28,6 +28,16 @@
                 <label for="price">Prezzo</label>
                 <input th:field="*{price}" id="price" type="number" step="0.01" required>
                 <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+            </div>
+
+         
+
+            <h3>Aggiungi gli ingredienti desiderati</h3>
+             <div th:each="ingredient : ${ingredients}">
+                <label>
+                    <input type="checkbox" name="ingredientIds" th:value="${ingredient.id}">
+                    <span th:text="${ingredient.name}"></span>
+                </label>
             </div>
 
             <button type="submit">Crea Nuova Pizza</button>

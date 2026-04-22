@@ -19,8 +19,11 @@
             -
             <span th:text="${offer.endDate}"></span>
             <!-- edit button -->
-            <a th:href="@{/offers/{id}/edit(id=${offer.id})}">Edit</a>
+            <a th:href="@{/offers/{id}/edit(id=${offer.id})}">Modifica offerta</a>
         </div>
+
+        <h4>Ingredienti presenti nella pizza:</h4>
+        <div th:each="ingredient : ${pizza.ingredients}" th:text="${ingredient.name}"></div>
         <a th:href="@{/pizzas/{id}/edit(id=${pizza.id})}">Modifica pizza</a>
         <a th:href="@{/offers/create(pizzaId=${pizza.id})}">Aggiungi un offerta</a>
     </main>

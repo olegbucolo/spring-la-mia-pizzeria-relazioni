@@ -15,7 +15,7 @@
                 <a th:href="@{'/pizzas/' + ${pizza.id} + '/edit'}" class="me-2">Modifica</a>
                 <form th:action="@{'/pizzas/' + ${pizza.id}}" method="post">
                     <input type="hidden" name="_method" value="delete">
-                    <button class="bg-danger" type="submit">Cancella</button>
+                    <button class="bg-danger" type="submit">Elimina</button>
                 </form>
             </div>
         </div>
